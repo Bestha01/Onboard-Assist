@@ -1,0 +1,78 @@
+<div class="chat-container">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <button class="back-btn" (click)="goHome()"><i class="fas fa-arrow-left"></i></button>
+      <i class="fas fa-graduation-cap"></i>
+      <span>OnboardAssist</span>
+    </div>
+    <div class="nav-links">
+      <a (click)="navigateTo('/help')" class="nav-link"><i class="fas fa-question-circle"></i> Help</a>
+      <a (click)="navigateTo('/profile')" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+      <button class="btn-logout" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </nav>
+
+  <!-- Chat Header -->
+  <div class="chat-header">
+    <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+    <div>
+      <h3>OnboardAssist AI</h3>
+      <p class="status"><span class="status-dot"></span> Online</p>
+    </div>
+  </div>
+
+  <!-- Messages -->
+  <div class="messages-area" #chatMessages>
+    <!-- Empty state -->
+    <div *ngIf="messages.length === 0" class="empty-state">
+      <i class="fas fa-comments"></i>
+      <h3>Start a Conversation</h3>
+      <p>Ask any onboarding question and get instant AI-powered answers.</p>
+    </div>
+
+    <!-- Message bubbles -->
+    <div *ngFor="let msg of messages" class="message-wrapper" [class.user-wrapper]="msg.type === 'user'">
+      <div *ngIf="msg.type === 'ai'" class="ai-bubble-icon">
+        <i class="fas fa-robot"></i>
+      </div>
+      <div class="message-bubble" [class.user-bubble]="msg.type === 'user'" [class.ai-bubble]="msg.type === 'ai'">
+        <div class="message-content" [innerHTML]="formatMessage(msg.content)"></div>
+        <div class="message-time">{{ msg.timestamp | date:'h:mm a' }}</div>
+      </div>
+      <div *ngIf="msg.type === 'user'" class="user-bubble-icon">
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+
+    <!-- Typing indicator -->
+    <div *ngIf="isLoading" class="message-wrapper">
+      <div class="ai-bubble-icon"><i class="fas fa-robot"></i></div>
+      <div class="message-bubble ai-bubble typing-bubble">
+        <div class="typing-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input Area -->
+  <div class="input-area">
+    <div class="input-container">
+      <textarea
+        class="message-input"
+        placeholder="Ask a follow-up question..."
+        [(ngModel)]="currentQuestion"
+        (keydown)="onKeyDown($event)"
+        rows="1"
+      ></textarea>
+      <button class="mic-btn" [class.listening]="isListening" (click)="toggleVoice()" title="Voice input">
+        <i class="fas" [class.fa-microphone]="!isListening" [class.fa-stop]="isListening"></i>
+      </button>
+      <button class="send-btn" (click)="sendMessage()" [disabled]="!currentQuestion.trim() || isLoading">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+    <p class="input-hint">Press Enter to send · Shift+Enter for new line</p>
+  </div>
+</div>

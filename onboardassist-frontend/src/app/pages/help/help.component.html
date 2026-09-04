@@ -1,0 +1,50 @@
+<div class="help-container">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <button class="back-btn" (click)="navigateTo('/home')"><i class="fas fa-arrow-left"></i></button>
+      <i class="fas fa-graduation-cap"></i>
+      <span>OnboardAssist</span>
+    </div>
+    <div class="nav-links">
+      <a (click)="navigateTo('/profile')" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+      <button class="btn-logout" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </nav>
+
+  <div class="content">
+    <h1 class="page-title">Help & Documentation</h1>
+    
+    <div class="help-cards">
+      <div class="help-card">
+        <h3><i class="fas fa-info-circle text-primary"></i> How to Use</h3>
+        <p>1. Type your question in the chat or use the microphone button to ask via voice.</p>
+        <p>2. Wait for the AI to process and generate an answer.</p>
+        <p>3. Follow up with any additional questions you may have.</p>
+      </div>
+
+      <div class="help-card">
+        <h3><i class="fas fa-question text-primary"></i> Sample Questions</h3>
+        <ul>
+          <li>"What is the dress code?"</li>
+          <li>"How do I setup my email?"</li>
+          <li>"Where can I find the employee handbook?"</li>
+        </ul>
+      </div>
+
+      <div class="help-card">
+        <h3><i class="fas fa-microphone text-primary"></i> Voice Input</h3>
+        <p>Click the microphone icon in the chat or search bar. Speak clearly into your device's microphone. Your speech will be converted to text automatically. Ensure your browser has permission to access the microphone.</p>
+      </div>
+      
+      <div class="help-card">
+        <h3><i class="fas fa-list text-primary"></i> Supported Topics</h3>
+        <p>OnboardAssist can help you with IT setup, HR policies, facility information, training schedules, team introductions, and general company FAQs.</p>
+      </div>
+    </div>
+    
+    <div class="disclaimer">
+      <i class="fas fa-exclamation-triangle"></i> For sensitive or highly specific issues not covered here, please reach out to your HR representative.
+    </div>
+  </div>
+</div>

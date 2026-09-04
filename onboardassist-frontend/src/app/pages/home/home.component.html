@@ -1,0 +1,65 @@
+<div class="home-container">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <i class="fas fa-graduation-cap"></i>
+      <span>OnboardAssist</span>
+    </div>
+    <div class="nav-links">
+      <a (click)="navigateTo('/help')" class="nav-link"><i class="fas fa-question-circle"></i> Help</a>
+      <a (click)="navigateTo('/profile')" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+      <button class="btn-logout" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="hero-content">
+      <p class="greeting">Hello, {{ userName }}! 👋</p>
+      <h1 class="hero-title">How can we help you today?</h1>
+      <p class="hero-subtitle">AI-Powered Onboarding Query Resolution System</p>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <div class="search-bar">
+          <i class="fas fa-search search-icon"></i>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Ask your onboarding question..."
+            [(ngModel)]="question"
+            (keydown)="onKeyDown($event)"
+          >
+          <button class="mic-btn" [class.listening]="isListening" (click)="toggleVoice()" title="Voice input">
+            <i class="fas" [class.fa-microphone]="!isListening" [class.fa-stop]="isListening"></i>
+          </button>
+        </div>
+        <button class="ask-btn" (click)="askQuestion()" [disabled]="!question.trim()">
+          <i class="fas fa-paper-plane"></i> Ask Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Cards -->
+  <div class="topics-section">
+    <h2>Popular Topics</h2>
+    <p class="topics-subtitle">Click a topic to start a conversation</p>
+    <div class="topics-grid">
+      <div class="topic-card" *ngFor="let topic of topics" (click)="onTopicClick(topic)">
+        <div class="topic-icon">
+          <i [class]="topic.icon"></i>
+        </div>
+        <h3>{{ topic.title }}</h3>
+        <p>{{ topic.description }}</p>
+        <div class="topic-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    <i class="fas fa-info-circle"></i>
+    <span>OnboardAssist provides AI-generated responses based on organizational knowledge. For complex issues, please contact your HR or IT team directly.</span>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="profile-container">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <button class="back-btn" (click)="navigateTo('/home')"><i class="fas fa-arrow-left"></i></button>
+      <i class="fas fa-graduation-cap"></i>
+      <span>OnboardAssist</span>
+    </div>
+    <div class="nav-links">
+      <a (click)="navigateTo('/help')" class="nav-link"><i class="fas fa-question-circle"></i> Help</a>
+      <button class="btn-logout" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </nav>
+
+  <div class="content">
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="avatar">{{ user?.name?.charAt(0) || 'U' }}</div>
+        <h2>{{ user?.name || 'User' }}</h2>
+        <span class="role-badge">{{ user?.role || 'Employee' }}</span>
+      </div>
+
+      <div class="profile-details">
+        <div class="detail-item">
+          <div class="detail-label"><i class="fas fa-envelope"></i> Email Address</div>
+          <div class="detail-value">{{ user?.email || 'user@example.com' }}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label"><i class="fas fa-calendar-alt"></i> Joined Date</div>
+          <div class="detail-value">Just Joined</div>
+        </div>
+      </div>
+
+      <div class="profile-actions">
+        <button class="btn-danger" (click)="logout()">
+          <i class="fas fa-sign-out-alt"></i> Sign Out
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
